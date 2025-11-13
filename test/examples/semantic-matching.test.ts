@@ -59,6 +59,7 @@ describe('SemanticForwardRefMigration (Section 5: Semantic Matching)', () => {
                         `,
                         `
                         import * as React from 'react';
+                        import {forwardRef} from 'react';
                         import {memo} from 'react';
                         const MyComponent = memo(forwardRef(Component));
                         `
@@ -84,9 +85,37 @@ describe('SemanticForwardRefMigration (Section 5: Semantic Matching)', () => {
                         `,
                         `
                         import React from 'react';
+                        import {forwardRef} from 'react';
                         import {memo} from 'react';
                         const MyComponent = memo(forwardRef(Component));
                         `
+                    ),
+                    packageJson(REACT_PACKAGE_JSON)
+                )
+            );
+        }, {unsafeCleanup: true});
+    });
+
+    test('matches forwardRef with aliased import', async () => {
+        const spec = new RecipeSpec();
+        spec.recipe = new SemanticForwardRefMigration();
+
+        await withDir(async (repo) => {
+            await spec.rewriteRun(
+                npm(
+                    repo.path,
+                    typescript(
+                        `
+                        import { forwardRef as reactForwardRef } from 'react';
+                        const MyComponent = reactForwardRef(Component);
+                        `,
+                        `
+                        import { forwardRef as reactForwardRef , forwardRef, memo} from 'react';
+                        const MyComponent = memo(forwardRef(Component));
+                        `
+                        // Note: Semantic matching FOUND it via the alias 'reactForwardRef'
+                        // The template normalizes to 'forwardRef' - that's okay!
+                        // The magic is that it matched despite the alias
                     ),
                     packageJson(REACT_PACKAGE_JSON)
                 )
