@@ -6,7 +6,7 @@
  */
 
 // Section 3: Your First Recipe
-export {RenameMethodRecipe} from './examples/rename-method-recipe.js';
+export {RenameMethod} from './examples/rename-method-recipe.js';
 
 // Section 4: Pattern Matching & Templates
 export {

@@ -1,4 +1,4 @@
-import {ExecutionContext, Recipe, TreeVisitor} from "@openrewrite/rewrite";
+import {ExecutionContext, Option, Recipe, TreeVisitor} from "@openrewrite/rewrite";
 import {JavaScriptVisitor} from "@openrewrite/rewrite/javascript";
 import {J} from "@openrewrite/rewrite/java";
 import {produce} from "immer";
@@ -6,29 +6,50 @@ import {produce} from "immer";
 /**
  * Example from Section 3: Your First Recipe
  *
- * Renames method calls from oldMethod to newMethod, demonstrating:
+ * Renames method calls from one name to another, demonstrating:
  * - Basic visitor pattern
  * - Bottom-up traversal (calling super first)
  * - Immutable updates with immer's produce()
+ * - Recipe options for configurability
  */
-export class RenameMethodRecipe extends Recipe {
+export class RenameMethod extends Recipe {
     name = "org.example.RenameMethod";
-    displayName = "Rename old method to new method";
-    description = "Updates method calls from oldMethod to newMethod";
+    displayName = "Rename method calls";
+    description = "Updates method calls from one name to another";
+
+    @Option({
+        displayName: "Old method name",
+        description: "The method name to replace"
+    })
+    oldName!: string;
+
+    @Option({
+        displayName: "New method name",
+        description: "The method name to replace with"
+    })
+    newName!: string;
+
+    constructor(options: { oldName: string; newName: string }) {
+        super(options);
+    }
 
     async editor(): Promise<TreeVisitor<any, ExecutionContext>> {
+        const oldName = this.oldName;
+        const newName = this.newName;
+
         return new class extends JavaScriptVisitor<ExecutionContext> {
             protected async visitMethodInvocation(
                 method: J.MethodInvocation,
                 ctx: ExecutionContext
             ): Promise<J | undefined> {
                 // Visit children first (bottom-up traversal)
+                // This ensures nested calls are processed before their parents
                 method = (await super.visitMethodInvocation(method, ctx)) as J.MethodInvocation;
 
                 // Transform if this is our target method
-                if (method.name.simpleName === 'oldMethod') {
+                if (method.name.simpleName === oldName) {
                     return produce(method, draft => {
-                        draft.name.simpleName = 'newMethod';
+                        draft.name.simpleName = newName;
                     });
                 }
 
