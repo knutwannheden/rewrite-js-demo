@@ -8,6 +8,9 @@
 // Section 3: Your First Recipe
 export {RenameMethod} from './examples/rename-method-recipe.js';
 
+// Section 3.1: Data Tables & Search Recipes
+export {FindMethodCalls, MethodCallRecord} from './examples/find-method-calls.js';
+
 // Section 4: Pattern Matching & Templates
 export {
     PatternBasedMigration,
