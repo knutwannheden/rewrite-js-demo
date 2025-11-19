@@ -63,7 +63,7 @@ export class CreateClassToES6 extends Recipe {
                     // 2. Transform getInitialState to constructor
                     // 3. Handle propTypes and defaultProps as static properties
                     // 4. Handle mixins (warn or error)
-                    return await tmpl.apply(this.cursor, varDecls, match);
+                    return await tmpl.apply(varDecls, this.cursor, {values: match});
                 }
 
                 return varDecls;
@@ -100,7 +100,7 @@ export class WrapForwardRefInMemo extends Recipe {
                 if (match) {
                     // We're making a transformation, ensure memo is imported
                     maybeAddImport(this, { target: 'react', member: 'memo', onlyIfReferenced: false });
-                    return await tmpl.apply(this.cursor, method, match) || method;
+                    return await tmpl.apply(method, this.cursor, {values: match}) || method;
                 }
 
                 return method;
