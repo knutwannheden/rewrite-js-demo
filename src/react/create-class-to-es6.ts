@@ -99,7 +99,7 @@ export class WrapForwardRefInMemo extends Recipe {
                 const match = await pat.match(method, this.cursor);
                 if (match) {
                     // We're making a transformation, ensure memo is imported
-                    maybeAddImport(this, { target: 'react', member: 'memo', onlyIfReferenced: false });
+                    maybeAddImport(this, { module: 'react', member: 'memo', onlyIfReferenced: false });
                     return await tmpl.apply(method, this.cursor, {values: match}) || method;
                 }
 
