@@ -45,8 +45,8 @@ export class SemanticForwardRefMigration extends Recipe {
                             dependencies: { '@types/react': '^18.0.0' }
                         });
                     // We're making a transformation, ensure memo is imported
-                    maybeAddImport(this, { module: 'react', member: 'forwardRef', onlyIfReferenced: false });
-                    maybeAddImport(this, { module: 'react', member: 'memo', onlyIfReferenced: false });
+                    maybeAddImport(this, { module: 'react', member: 'forwardRef' });
+                    maybeAddImport(this, { module: 'react', member: 'memo' });
                     return await tmpl.apply(method, this.cursor, {values: match});
                 }
 

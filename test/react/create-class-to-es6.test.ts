@@ -1,7 +1,7 @@
 // noinspection TypeScriptCheckImport
 
 import {RecipeSpec} from "@openrewrite/rewrite/test";
-import {npm, packageJson, tsx, typescript} from "@openrewrite/rewrite/javascript";
+import {npm, packageJson, tsx} from "@openrewrite/rewrite/javascript";
 import {CreateClassToES6, WrapForwardRefInMemo} from "../../src/react/create-class-to-es6";
 import {withDir} from "tmp-promise";
 
@@ -30,11 +30,11 @@ describe('WrapForwardRefInMemo (Section 6: React Migration)', () => {
                     repo.path,
                     tsx(
                         `
-                        import { forwardRef } from 'react';
+                        import {forwardRef} from 'react';
                         const MyComponent = forwardRef((props, ref) => <div ref={ref}>Hello</div>);
                         `,
                         `
-                        import { forwardRef , memo} from 'react';
+                        import {forwardRef, memo} from 'react';
                         const MyComponent = memo(forwardRef((props, ref) => <div ref={ref}>Hello</div>));
                         `
                     ),
