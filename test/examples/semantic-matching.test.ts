@@ -110,7 +110,7 @@ describe('SemanticForwardRefMigration (Section 5: Semantic Matching)', () => {
                         const MyComponent = reactForwardRef(Component);
                         `,
                         `
-                        import { forwardRef as reactForwardRef, forwardRef, memo } from 'react';
+                        import { forwardRef, memo, forwardRef as reactForwardRef } from 'react';
                         const MyComponent = memo(forwardRef(Component));
                         `
                         // Note: Semantic matching FOUND it via the alias 'reactForwardRef'
