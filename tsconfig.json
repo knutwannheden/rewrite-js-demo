@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "es2016",
     "module": "Node16",
+    "isolatedModules": true,
     "declarationMap": true,
     "sourceMap": true,
     "esModuleInterop": true,
