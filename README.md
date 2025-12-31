@@ -49,7 +49,7 @@ PRESENTATION.md                    # Complete presentation outline
 - Renames method calls from one name to another
 - Shows bottom-up traversal (handles nested calls)
 - Uses `@Option` decorator for configurable parameters
-- Uses immer for immutable updates
+- Uses Mutative for immutable updates
 
 ### Section 3.1: Data Tables & Search Recipes
 
@@ -102,7 +102,7 @@ PRESENTATION.md                    # Complete presentation outline
 
 1. **Visitor Pattern**: Override specific AST node types
 2. **Bottom-Up Traversal**: Call `super` first to visit children
-3. **Immutable Updates**: Use `produce()` from immer
+3. **Immutable Updates**: Use `create()` from Mutative
 4. **Recipe Options**: `@Option` decorator for configurable parameters
 5. **Data Tables**: Collect structured data for analysis (`@Column`, `@Transient`)
 6. **Pattern Matching**: Declarative `pattern` and `template`
@@ -148,7 +148,7 @@ The skill provides:
 
 ## Notes
 
-- All recipes use `@openrewrite/rewrite@next` for latest features
+- All recipes use `@openrewrite/rewrite` ^8.70.4
 - Tests use `tmp-promise` for isolated test environments
 - Recipes demonstrate concepts - production versions would need more error handling
 - The `CreateClassToES6` recipe is simplified for demonstration purposes

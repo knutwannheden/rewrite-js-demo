@@ -19,13 +19,13 @@
     "ci:test": "jest"
   },
   "dependencies": {
-    "@openrewrite/rewrite": "next"
+    "@openrewrite/rewrite": "^8.70.4"
   },
   "devDependencies": {
     "@types/jest": "^29.5.13",
     "@types/node": "^22.5.4",
     "@types/react": "^18.3.0",
-    "immer": "^10.1.1",
+    "mutative": "^1.1.0",
     "jest": "^29.7.0",
     "jest-junit": "^16.0.0",
     "react": "^18.3.0",

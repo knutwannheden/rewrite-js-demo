@@ -59,8 +59,7 @@ describe('SemanticForwardRefMigration (Section 5: Semantic Matching)', () => {
                         `,
                         `
                         import * as React from 'react';
-                        import {forwardRef} from 'react';
-                        import {memo} from 'react';
+                        import {forwardRef, memo} from 'react';
                         const MyComponent = memo(forwardRef(Component));
                         `
                     ),
@@ -84,9 +83,7 @@ describe('SemanticForwardRefMigration (Section 5: Semantic Matching)', () => {
                         const MyComponent = React.forwardRef(Component);
                         `,
                         `
-                        import React from 'react';
-                        import {forwardRef} from 'react';
-                        import {memo} from 'react';
+                        import React, {forwardRef, memo} from 'react';
                         const MyComponent = memo(forwardRef(Component));
                         `
                     ),

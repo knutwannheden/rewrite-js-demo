@@ -146,7 +146,7 @@ export class RenameMethod extends Recipe {
 
                 // Transform if this is our target method
                 if (method.name.simpleName === oldName) {
-                    return produce(method, draft => {
+                    return create(method, draft => {
                         draft.name.simpleName = newName;
                     });
                 }
@@ -161,7 +161,7 @@ export class RenameMethod extends Recipe {
 ### Key Concepts Demonstrated
 1. **Visitor Pattern**: Override specific node types you want to transform
 2. **Bottom-Up Traversal**: Call `super` first to visit children (handles nested calls correctly)
-3. **Immutable Updates**: Use `immer`'s `produce()` for safe modifications
+3. **Immutable Updates**: Use `mutative`'s `create()` for safe modifications
 4. **Recipe Options**: Use `@Option` decorator with metadata for configurable parameters
 5. **Constructor Pattern**: Accept options object and pass to `super(options)`
 6. **Type Safety**: TypeScript ensures correct AST manipulation
@@ -545,8 +545,8 @@ async editor(): Promise<TreeVisitor<any, ExecutionContext>> {
 
 ### Installation
 ```bash
-npm install @openrewrite/rewrite@next
-npm install --save-dev typescript @types/node immer @jest/globals jest
+npm install @openrewrite/rewrite
+npm install --save-dev typescript @types/node mutative @jest/globals jest
 ```
 
 ### TypeScript Configuration

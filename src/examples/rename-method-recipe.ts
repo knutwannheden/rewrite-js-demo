@@ -1,7 +1,7 @@
 import {ExecutionContext, Option, Recipe, TreeVisitor} from "@openrewrite/rewrite";
 import {JavaScriptVisitor} from "@openrewrite/rewrite/javascript";
 import {J} from "@openrewrite/rewrite/java";
-import {produce} from "immer";
+import {create} from "mutative";
 
 /**
  * Example from Section 3: Your First Recipe
@@ -9,7 +9,7 @@ import {produce} from "immer";
  * Renames method calls from one name to another, demonstrating:
  * - Basic visitor pattern
  * - Bottom-up traversal (calling super first)
- * - Immutable updates with immer's produce()
+ * - Immutable updates with mutative's create()
  * - Recipe options for configurability
  */
 export class RenameMethod extends Recipe {
@@ -48,7 +48,7 @@ export class RenameMethod extends Recipe {
 
                 // Transform if this is our target method
                 if (method.name.simpleName === oldName) {
-                    return produce(method, draft => {
+                    return create(method, draft => {
                         draft.name.simpleName = newName;
                     });
                 }
